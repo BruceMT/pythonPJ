@@ -12,7 +12,7 @@ Plan to use'Python 3.7' , 'Pygame'.
 --------
 #3)Implementation plan:
 
-Before due date ,finish it !
+Before the due day ,finish it !
 --------
 #4)How to run:
 
