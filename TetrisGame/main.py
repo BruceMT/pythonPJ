@@ -5,7 +5,7 @@
 import sys
 import pygame
 from settings import *
-
+from piece import Piece
 
 def main():
 
@@ -17,6 +17,8 @@ def main():
 #background color
     bg_color = (230, 230, 230)
 
+#create blocks
+    piece = Piece('S', screen)
 #main body
     while True:
 
@@ -30,6 +32,8 @@ def main():
         #draw the line
         draw_game_area(screen)
 
+        #draw block with method
+        piece.paint()
         #draw block
         draw_cell(screen, GAME_AREA_LEFT, GAME_AREA_TOP)
         # make draw visible
