@@ -20,13 +20,12 @@ def main():
 #create blocks
     piece = Piece('S', screen)
 #main body
+
     while True:
+        check_events(piece)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:  #close window
-                sys.exit()   #esc  program
 
- #Fill in the screen background color
+        #Fill in the screen background color
         screen.fill(bg_color)
 
         #draw the line
@@ -39,6 +38,23 @@ def main():
         # make draw visible
         pygame.display.flip()
 
+def check_events(piece):
+      '''catch the event'''
+      for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+               sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                   #print("press aown")
+                   piece.move_down()
+                elif event.key == pygame.K_UP:
+                   print("press up")
+                elif event.key == pygame.K_RIGHT:
+                    # print("press right")
+                    piece.move_right()
+                elif event.key == pygame.K_LEFT:
+                    #print("press left")
+                    piece.move_left()
 # dtaw the game area
 def draw_game_area(screen):
         #color(rgb), start node, end node
@@ -69,6 +85,7 @@ def draw_cell(screen,left,top):
     cell_rect = pygame.Rect(cell_left_top , cell_width_height)  # draw the left-top rect
 
     pygame.draw.rect(screen, CELL_COLOR, cell_rect)  # draw rect
+
 
 if __name__ == '__main__':
        main()

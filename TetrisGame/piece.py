@@ -12,7 +12,14 @@ class Piece():
             self.y = 0
             self.shape = shape
             self.screen = screen
+    def move_right(self):
+        self.x += 1
 
+    def move_left(self):
+        self.x -= 1
+
+    def move_down(self):
+        self.y += 1
     def paint(self):
         shape_template = PIECES[self.shape]
 
