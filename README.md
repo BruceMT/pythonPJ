@@ -17,7 +17,12 @@ Before the due day ,finish it !
 #4)How to run:
 
 The project consists of a few classes. My plan is that user open the main class then follow the graphical navigation to enjoy the game.
+<<<<<<< HEAD
 use pycharm to open the project
+=======
+
+It's a pycharm project, use pycharm to open
+>>>>>>> 3a344ec2e5e62e19ae1930333678a49c67bbd7a2
 --------
 #5)Author:
 
