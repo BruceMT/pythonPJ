@@ -16,6 +16,9 @@ EDGE_COLOR = (0, 0, 0)          #edge color
 CELL_COLOR = (100, 100, 100)    #block color
 BG_COLOR = (230, 230, 230)      #background color
 WALL_BLANK_LABEL = '-'
+TIMER_INTERVAL = 1000
+SCORE_LABEL_COLOR = (0, 0, 0)
+SCORE_COLOR = (255, 0, 0)
 
 PIECE_TYPES = ['S', 'Z', 'J', 'L', 'I', 'O', 'T']
 PIECE_COLORS = {
