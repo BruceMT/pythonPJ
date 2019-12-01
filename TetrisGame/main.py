@@ -18,7 +18,7 @@ def main():
 
     screen = pygame.display.set_mode((1200, 900) )  #resolution ratio 1200*900
     pygame.display.set_caption("TetrisGame")  #window title
-    pygame.key.set_repeat(10, 100)
+    pygame.key.set_repeat(50, 100)
 
     #background color
     bg_color = (230, 230, 230)
@@ -37,9 +37,10 @@ def main():
 
 
         if  game_state.piece and game_state.piece.is_on_bottom:
-            game_state.wall.add_to_wall(game_state.piece)
+            '''game_state.wall.add_to_wall(game_state.piece)
             game_state.add_score(game_state.wall.eliminate_lines())
-            game_state.piece = Piece(random.choice(PIECE_TYPES), screen,game_state.wall)
+            game_state.piece = Piece(random.choice(PIECE_TYPES), screen,game_state.wall)'''
+            game_state.touch_bottom()
 
         check_events(game_state)
 
@@ -47,15 +48,15 @@ def main():
         #Fill in the screen background color
         screen.fill(bg_color)
 
-
         #draw the wall
         #GameDisplay.draw_game_area(screen, game_state)
 
-        GameDisplay.draw_game_area(screen, game_state, game_resource)
+
         #draw block with method
         if game_state.piece:
             game_state.piece.paint()
 
+        GameDisplay.draw_game_area(screen, game_state, game_resource)
         # make draw visible
         pygame.display.flip()
 
@@ -71,28 +72,33 @@ def check_events(game_state):
 
 def on_key_down(event,game_state):
 
-    if event.key == pygame.K_DOWN:
+    if not game_state.paused and event.key == pygame.K_DOWN:
         #print("press aown")
         if game_state.piece:
             game_state.piece.move_down()
-    elif event.key == pygame.K_UP:
+    elif not game_state.paused and event.key == pygame.K_UP:
         # print("press up")
         if game_state.piece:
             game_state.piece.turn()
-    elif event.key == pygame.K_RIGHT:
+    elif not game_state.paused and event.key == pygame.K_RIGHT:
         # print("press right")
         if game_state.piece:
             game_state.piece.move_right()
-    elif event.key == pygame.K_LEFT:
+    elif not game_state.paused and event.key == pygame.K_LEFT:
         #print("press left")
         if game_state.piece:
             game_state.piece.move_left()
-    elif event.key == pygame.K_f:
+    elif not game_state.paused and event.key == pygame.K_f:
         if game_state.piece:
             game_state.piece.fall_down()
     elif event.key == pygame.K_s and game_state.stopped:
         game_state.start_game()
 
+    elif event.key == pygame.K_p and not game_state.stopped:
+        if game_state.paused:
+                game_state.resume_game()
+        else:
+                game_state.pause_game()
 
 
 

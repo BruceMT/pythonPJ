@@ -35,7 +35,7 @@ class Piece():
         for r in range(len(shape_mtx)):
             for c in range(len(shape_mtx[0])):
                 if shape_mtx[r][c] == 'O':  # Omeans not empty
-                    if self.x + c >= COLUMN_NUM - 1:
+                    if self.x + c >= COLUMN_NUM - 1 or self.game_wall.is_wall(self.y + r, self.x + c + 1):
                         return False
         return True
 
@@ -55,7 +55,7 @@ class Piece():
         for r in range(len(shape_mtx)):
             for c in range(len(shape_mtx[0])):
                 if shape_mtx[r][c] == 'O':  # Omeans not empty
-                    if self.x + c <= 0:
+                    if self.x + c <= 0 or self.game_wall.is_wall(self.y + r, self.x + c - 1):
                         return False
         return True
 
@@ -85,7 +85,8 @@ class Piece():
         for r in range(len(shape_mtx)):
             for c in range(len(shape_mtx[0])):
                 if shape_mtx[r][c] == 'O':
-                    if (self.x + c < 0 or self.x + c >= COLUMN_NUM) or (self.y + r < 0 or self.y + r >= LINE_NUM):
+                    if (self.x + c < 0 or self.x + c >= COLUMN_NUM) or (self.y + r < 0 or self.y + r >= LINE_NUM)\
+                            or self.game_wall.is_wall(self.y + r, self.x + c):
                         return False
         return True
 
@@ -101,3 +102,12 @@ class Piece():
 
         while not self.is_on_bottom:
             self.move_down()
+
+    def hit_wall(self):
+        shape_mtx = PIECES[self.shape][self.turn_times]
+        for r in range(len(shape_mtx)):
+            for c in range(len(shape_mtx[0])):
+                if shape_mtx[r][c] == 'O':
+                    if self.game_wall.is_wall(self.y + r, self.x + c):
+                        return True
+        return False

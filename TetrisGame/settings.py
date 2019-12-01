@@ -11,7 +11,7 @@ COLUMN_NUM = 10         #game area have 10 column
 GAME_AREA_WIDTH = CELL_WIDTH * 10       #10 blocks
 GAME_AREA_HEIGHT = CELL_WIDTH * 20      #20 rowa
 GAME_AREA_LEFT = (SCREEN_WIDTH - GAME_AREA_WIDTH) // 2      #left blank
-GAME_AREA_TOP = SCREEN_HEIGHT - GAME_AREA_HEIGHT          #top blank
+GAME_AREA_TOP = SCREEN_HEIGHT - GAME_AREA_HEIGHT  -50        #top blank
 EDGE_COLOR = (0, 0, 0)          #edge color
 CELL_COLOR = (100, 100, 100)    #block color
 BG_COLOR = (230, 230, 230)      #background color
@@ -19,7 +19,11 @@ WALL_BLANK_LABEL = '-'
 TIMER_INTERVAL = 1000
 SCORE_LABEL_COLOR = (0, 0, 0)
 SCORE_COLOR = (255, 0, 0)
+EDGE_WIDTH = 5 #hint block width
+MARGIN_WIDTH = 40 #distance between hint area and game area
 
+TITLE_COLOR = (0, 0, 255)
+HANZI_COLOR = (0, 0, 0)
 PIECE_TYPES = ['S', 'Z', 'J', 'L', 'I', 'O', 'T']
 PIECE_COLORS = {
     'S': (0, 255, 128),
