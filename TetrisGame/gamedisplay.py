@@ -3,6 +3,7 @@
 # @title: pythonPJ
 #
 from settings import *
+
 import pygame
 
 class GameDisplay():
@@ -16,7 +17,7 @@ class GameDisplay():
         pygame.draw.rect(screen, color, cell_rect)
 
     @staticmethod
-    def draw_game_area(screen, game_state):
+    def draw_game_area(screen, game_state, game_resource):
 
         for r in range(21):
                 pygame.draw.line(screen, EDGE_COLOR, (GAME_AREA_LEFT, GAME_AREA_TOP + r * CELL_WIDTH),
@@ -27,6 +28,8 @@ class GameDisplay():
         GameDisplay.draw_wall(game_state.wall)
         GameDisplay.draw_score(screen, game_state.game_score)
 
+        if game_state.stopped:
+            GameDisplay.draw_start_prompt(screen, game_resource)
 
     @staticmethod
     def draw_wall(game_wall):
@@ -50,3 +53,8 @@ class GameDisplay():
         score_label_width = score_label_surface.get_width()
         score_position = (score_label_position[0] + score_label_width + 20, score_label_position[1])
         screen.blit(score_surface, score_position)
+
+    @staticmethod
+    def draw_start_prompt(screen, game_resource):
+        start_tip_position = (GAME_AREA_LEFT - 3* CELL_WIDTH, GAME_AREA_TOP + 6* CELL_WIDTH)
+        screen.blit(game_resource.load_newgame_img(), start_tip_position)

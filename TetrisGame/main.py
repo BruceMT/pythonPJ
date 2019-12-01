@@ -11,6 +11,7 @@ from piece import Piece
 from gamewall import GameWall
 from gamedisplay import GameDisplay
 from gamestate import GameState
+from gameresource import  GameResource
 def main():
 
     pygame.init()
@@ -29,17 +30,18 @@ def main():
     #game_wall = GameWall(screen)
     #piece = Piece(random.choice(PIECE_TYPES), screen,game_wall)
     game_state = GameState(screen)
-
+    game_resource = GameResource()
     #main body
 
     while True:
 
-        if  game_state.piece.is_on_bottom:
+
+        if  game_state.piece and game_state.piece.is_on_bottom:
             game_state.wall.add_to_wall(game_state.piece)
             game_state.add_score(game_state.wall.eliminate_lines())
             game_state.piece = Piece(random.choice(PIECE_TYPES), screen,game_state.wall)
 
-        check_events(game_state.piece)
+        check_events(game_state)
 
 
         #Fill in the screen background color
@@ -47,41 +49,49 @@ def main():
 
 
         #draw the wall
-        GameDisplay.draw_game_area(screen, game_state)
+        #GameDisplay.draw_game_area(screen, game_state)
 
+        GameDisplay.draw_game_area(screen, game_state, game_resource)
         #draw block with method
-        game_state.piece.paint()
+        if game_state.piece:
+            game_state.piece.paint()
 
         # make draw visible
         pygame.display.flip()
 
-def check_events(piece):
+def check_events(game_state):
       '''catch the event'''
       for event in pygame.event.get():
             if event.type == pygame.QUIT:
                sys.exit()
             elif event.type == pygame.KEYDOWN:
-                on_key_down(event,piece)
+                on_key_down(event,game_state)
             elif event.type == pygame.USEREVENT:
-                piece.move_down()
+                game_state.piece.move_down()
 
-def on_key_down(event,piece):
+def on_key_down(event,game_state):
 
     if event.key == pygame.K_DOWN:
         #print("press aown")
-        piece.move_down()
+        if game_state.piece:
+            game_state.piece.move_down()
     elif event.key == pygame.K_UP:
-        print("press up")
-        piece.turn()
+        # print("press up")
+        if game_state.piece:
+            game_state.piece.turn()
     elif event.key == pygame.K_RIGHT:
         # print("press right")
-        piece.move_right()
+        if game_state.piece:
+            game_state.piece.move_right()
     elif event.key == pygame.K_LEFT:
         #print("press left")
-        piece.move_left()
+        if game_state.piece:
+            game_state.piece.move_left()
     elif event.key == pygame.K_f:
-        piece.fall_down()
-
+        if game_state.piece:
+            game_state.piece.fall_down()
+    elif event.key == pygame.K_s and game_state.stopped:
+        game_state.start_game()
 
 
 
