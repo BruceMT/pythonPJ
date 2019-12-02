@@ -17,21 +17,21 @@ CELL_COLOR = (100, 100, 100)    #block color
 BG_COLOR = (230, 230, 230)      #background color
 WALL_BLANK_LABEL = '-'
 TIMER_INTERVAL = 1000
-SCORE_LABEL_COLOR = (0, 0, 0)
-SCORE_COLOR = (255, 0, 0)
+SCORE_LABEL_COLOR = (255, 255, 255)
+SCORE_COLOR = (200, 0, 0)
 EDGE_WIDTH = 5 #hint block width
 MARGIN_WIDTH = 40 #distance between hint area and game area
 
-TITLE_COLOR = (0, 0, 255)
-HANZI_COLOR = (0, 0, 0)
+TITLE_COLOR = (0, 0, 0)
+HANZI_COLOR = (255, 255, 255)
 PIECE_TYPES = ['S', 'Z', 'J', 'L', 'I', 'O', 'T']
 PIECE_COLORS = {
     'S': (0, 255, 128),
     'Z': (255, 128, 255),
-    'J': (128, 0, 255),
+    'J': (41, 23, 91),
     'L': (0, 0, 255),
-    'I': (255, 255, 0),
-    'O': (255, 0, 0),
+    'I': (50, 100, 50),
+    'O': (190, 0, 90),
     'T': (255, 128, 0)
 }
 

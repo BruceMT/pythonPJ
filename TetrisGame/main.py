@@ -31,6 +31,8 @@ def main():
     #piece = Piece(random.choice(PIECE_TYPES), screen,game_wall)
     game_state = GameState(screen)
     game_resource = GameResource()
+    game_resource.play_bg_music()
+
     #main body
 
     while True:
@@ -42,12 +44,12 @@ def main():
             game_state.piece = Piece(random.choice(PIECE_TYPES), screen,game_state.wall)'''
             game_state.touch_bottom()
 
-        check_events(game_state)
+        check_events(game_state, game_resource)
 
 
         #Fill in the screen background color
-        screen.fill(bg_color)
-
+        screen.blit(game_resource.load_bg_img(), (0, 0))
+        #screen.fill(bg_color)
         #draw the wall
         #GameDisplay.draw_game_area(screen, game_state)
 
@@ -60,17 +62,17 @@ def main():
         # make draw visible
         pygame.display.flip()
 
-def check_events(game_state):
+def check_events(game_state,game_resource):
       '''catch the event'''
       for event in pygame.event.get():
             if event.type == pygame.QUIT:
                sys.exit()
             elif event.type == pygame.KEYDOWN:
-                on_key_down(event,game_state)
+                on_key_down(event,game_state,game_resource)
             elif event.type == pygame.USEREVENT:
                 game_state.piece.move_down()
 
-def on_key_down(event,game_state):
+def on_key_down(event,game_state,game_resource):
 
     if not game_state.paused and event.key == pygame.K_DOWN:
         #print("press aown")
@@ -95,11 +97,16 @@ def on_key_down(event,game_state):
         game_state.start_game()
 
     elif event.key == pygame.K_p and not game_state.stopped:
+        game_resource.pause_bg_music()
         if game_state.paused:
                 game_state.resume_game()
         else:
                 game_state.pause_game()
+    elif event.key == pygame.K_q:
+        sys.exit()
 
+    elif event.key == pygame.K_m:
+        game_resource.pause_bg_music()
 
 
 # dtaw the game area

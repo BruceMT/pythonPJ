@@ -42,6 +42,7 @@ class GameDisplay():
             if game_state.session_count > 0:
                 GameDisplay.draw_game_over(screen, game_resource)
             GameDisplay.draw_start_prompt(screen, game_resource)
+            GameDisplay.draw_title_prompt(screen, game_resource)
         if game_state.paused:
             GameDisplay.draw_pause_prompt(screen, game_resource)
         GameDisplay.draw_next_piece(screen, game_state.next_piece)
@@ -58,9 +59,9 @@ class GameDisplay():
     @staticmethod
     def draw_score(screen, score):
         #draw the score
-        score_label_font = pygame.font.SysFont('simhei', 28)
+        score_label_font = pygame.font.SysFont('simhei', 30)
 
-        score_label_surface = score_label_font.render(u'Score：', False, SCORE_LABEL_COLOR)
+        score_label_surface = score_label_font.render(u'SCORE：', False, SCORE_LABEL_COLOR)
         score_label_position = (GAME_AREA_LEFT + COLUMN_NUM * CELL_WIDTH + 100, GAME_AREA_TOP + 6 * CELL_WIDTH)
         screen.blit(score_label_surface, score_label_position)
 
@@ -76,7 +77,11 @@ class GameDisplay():
         screen.blit(game_resource.load_newgame_img(), start_tip_position)
 
     @staticmethod
+    def draw_title_prompt(screen, game_resource):
+        title_tip_position = (GAME_AREA_LEFT - 1.3* CELL_WIDTH, GAME_AREA_TOP + 1 * CELL_WIDTH)
+        screen.blit(game_resource.load_title_img(), title_tip_position)
 
+    @staticmethod
     def draw_pause_prompt(screen, game_resource):
 
         '''pausing game'''
@@ -143,14 +148,14 @@ class GameDisplay():
 
     @staticmethod
     def draw_mannual(screen):
-        base_position_x = 40
-        base_position_y = GAME_AREA_TOP + 40
+        base_position_x = 830
+        base_position_y = GAME_AREA_TOP + 450
         title_font = pygame.font.SysFont('stkaiti', 30)
         title_surface = title_font.render(u'How to play:', True, TITLE_COLOR)
         title_position = (base_position_x, base_position_y)
         screen.blit(title_surface, title_position)
 
-        base_position_y += 60
+        base_position_y += 40
         gamectrl_label_font = pygame.font.SysFont('stkaiti', 24)
         gamectrl_label_surface = gamectrl_label_font.render(u'Game control:', True, TITLE_COLOR)
         gamectrl_label_position = (base_position_x, base_position_y)
@@ -158,7 +163,7 @@ class GameDisplay():
 
         base_position_y += 40
         man_font = pygame.font.SysFont('stkaiti', 24)
-        man_down_surface = man_font.render(u'Begin: s', False, HANZI_COLOR)
+        man_down_surface = man_font.render(u'Exit: q', False, HANZI_COLOR)
         man_down_position = (base_position_x, base_position_y)
         screen.blit(man_down_surface, man_down_position)
 
@@ -172,7 +177,7 @@ class GameDisplay():
 
         base_position_y += 40
         # man_font = pygame.font.SysFont('stkaiti', 20)
-        man_music_surface = man_font.render(u'Pause/continue musi: M', False, HANZI_COLOR)
+        man_music_surface = man_font.render(u'Pause/Continue musi: M', False, HANZI_COLOR)
         man_music_position = (base_position_x, base_position_y)
         screen.blit(man_music_surface, man_music_position)
 
@@ -190,7 +195,7 @@ class GameDisplay():
         screen.blit(man_down_surface, man_down_position)
 
         base_position_y += 40
-        man_move_surface = man_font.render(u'Move left:left key, '
+        man_move_surface = man_font.render(u'Move left: left key, '
                                            u'Move right: right key', False, HANZI_COLOR)
         man_move_position = (base_position_x, base_position_y)
         screen.blit(man_move_surface, man_move_position)
